@@ -1,16 +1,7 @@
-const { Pool } = require('pg');
+const { Pool, Client } = require('pg');
 require('dotenv').config();
+const { user, host, database, password, port } = require('../secrets/db_configurations');
 
-const pool = new Pool({
-    user: process.env.DB_USER,
-    host: process.env.DB_HOST,
-    database: process.env.DB_NAME,
-    password: process.env.PGPASSWORD,
-    port: process.env.DB_PORT
-});
+const pool = new Pool({ user, host, database, password, port });
 
-pool.query('SELECT * FROM monsters', (err, res) => {
-    if (err) return console.log(err);
-
-    console.log(res);
-});
+module.exports = pool;
