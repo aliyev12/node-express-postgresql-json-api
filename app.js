@@ -1,16 +1,13 @@
 const express = require ('express');
 const bodyParser = require('body-parser');
-const monsters = require('./routes/monsters');
-const habitats = require('./routes/habitats');
-const lives = require('./routes/lives');
+const cors = require('cors');
+const routes = require('./routes');
 
 const app = express ();
+app.use(cors());
 
 app.use(bodyParser.json());
-
-app.use('/monsters', monsters);
-app.use('/habitats', habitats);
-app.use('/lives', lives);
+app.use('/', routes);
 
 // Adding middlewear
 app.use((err, req, res, next) => {
